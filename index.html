@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rifa solidaria por la recuperación de Alberto, organizada por la comunidad TRIFENIX.">
+  <title>Juntos por Alberto | Rifa Solidaria</title>
+  <style>
+    :root{
+      --navy:#082b55;
+      --navy-2:#0d477d;
+      --yellow:#f8c53a;
+      --yellow-soft:#fff6d7;
+      --orange:#f47a32;
+      --cream:#fffdf8;
+      --white:#fff;
+      --text:#18324a;
+      --muted:#647487;
+      --line:#e6ebef;
+      --green:#2f9d72;
+      --shadow:0 12px 32px rgba(8,43,85,.10);
+      --radius:22px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:var(--cream);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .container{width:min(calc(100% - 32px),var(--max));margin-inline:auto}
+    .section{padding:64px 0}
+    .eyebrow{
+      color:var(--orange);font-size:.78rem;font-weight:800;
+      letter-spacing:.14em;text-transform:uppercase
+    }
+    h1,h2,h3,p{margin-top:0}
+    h2{font-size:clamp(1.8rem,5vw,2.65rem);line-height:1.1;color:var(--navy)}
+    .muted{color:var(--muted)}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(255,253,248,.95);
+      border-bottom:1px solid rgba(8,43,85,.08);
+      backdrop-filter:blur(12px);
+    }
+    .nav{
+      min-height:72px;display:flex;align-items:center;
+      justify-content:space-between;gap:20px
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand-mark{
+      width:44px;height:44px;border-radius:50%;
+      display:grid;place-items:center;background:var(--navy);
+      color:var(--yellow);font-size:1.35rem
+    }
+    .brand strong{display:block;color:var(--navy);font-size:1.02rem}
+    .brand small{display:block;color:var(--muted);font-size:.73rem}
+    nav ul{display:none;list-style:none;margin:0;padding:0;gap:24px}
+    nav a{text-decoration:none;font-size:.9rem;font-weight:700;color:var(--navy)}
+    nav a:hover{color:var(--orange)}
+
+    /* HERO */
+    .hero{
+      padding:56px 0 42px;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(248,197,58,.28),transparent 30%),
+        linear-gradient(145deg,#fffdf8,#f4f9fd);
+    }
+    .hero-grid{display:grid;gap:30px}
+    .hero h1{
+      color:var(--navy);font-size:clamp(2.6rem,10vw,5.5rem);
+      line-height:.92;letter-spacing:-.05em;margin:10px 0 20px
+    }
+    .hero h1 span{color:var(--orange)}
+    .hero p{font-size:1.08rem;max-width:650px}
+    .hero-card{
+      background:var(--navy);color:white;border-radius:var(--radius);
+      padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .hero-card::after{
+      content:"❤";position:absolute;right:-8px;bottom:-45px;
+      font-size:9rem;color:rgba(248,197,58,.12)
+    }
+    .hero-card strong{font-size:1.7rem;color:var(--yellow)}
+
+    /* FUNDRAISING */
+    .fundraising{margin-top:-2px}
+    .fund-card{
+      background:white;border:1px solid var(--line);
+      border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)
+    }
+    .fund-top{display:grid;gap:18px}
+    .amount{font-size:clamp(2rem,8vw,3.6rem);font-weight:900;color:var(--navy);line-height:1}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .stat{
+      padding:15px;border-radius:16px;background:#f5f8fa;text-align:center
+    }
+    .stat b{display:block;font-size:1.35rem;color:var(--navy)}
+    .progress{
+      height:18px;background:#e9eef2;border-radius:999px;
+      overflow:hidden;margin-top:22px
+    }
+    .progress > span{
+      display:block;height:100%;width:0;
+      background:linear-gradient(90deg,var(--yellow),var(--orange));
+      border-radius:inherit;transition:width .5s ease
+    }
+    .progress-copy{
+      margin-top:9px;display:flex;justify-content:space-between;
+      gap:15px;color:var(--muted);font-size:.86rem
+    }
+
+    /* SPONSORS */
+    .sponsors{background:#f5f9fc}
+    .sponsor-grid{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+    }
+    .sponsor{
+      min-height:145px;background:white;border:1px solid var(--line);
+      border-radius:18px;padding:18px;display:flex;flex-direction:column;
+      justify-content:space-between;transition:.2s ease
+    }
+    .sponsor:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .sponsor .emoji{font-size:2rem}
+    .sponsor-logo{width:100%;height:58px;object-fit:contain;object-position:left center;margin-bottom:8px}
+    .sponsor h3{font-size:1rem;color:var(--navy);margin:10px 0 4px}
+    .sponsor p{font-size:.85rem;color:var(--muted);margin:0}
+
+    /* STORY */
+    .story-grid{display:grid;gap:30px}
+    .story-visual{
+      min-height:300px;border-radius:var(--radius);
+      background:
+        linear-gradient(rgba(8,43,85,.08),rgba(8,43,85,.35)),
+        linear-gradient(135deg,#9bd3eb,#e8f6fb);
+      display:grid;place-items:center;text-align:center;padding:28px;color:white
+    }
+    .story-visual span{font-size:4rem}
+    .story-copy p{font-size:1.05rem}
+
+    /* PAYMENTS */
+    .payments{background:var(--navy);color:white}
+    .payments h2{color:white}
+    .payment-grid{display:grid;gap:18px}
+    .payment-card{
+      background:white;color:var(--text);border-radius:var(--radius);padding:24px
+    }
+    .payment-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .payment-title span{font-size:2rem}
+    .payment-title h3{margin:0;color:var(--navy);font-size:1.35rem}
+    .data-row{padding:9px 0;border-bottom:1px solid var(--line)}
+    .data-row:last-of-type{border:0}
+    .data-row small{display:block;color:var(--muted)}
+    .data-row strong{word-break:break-word}
+    .qr{
+      margin-top:18px;min-height:160px;border:2px dashed #ccd5dd;
+      border-radius:16px;display:grid;place-items:center;text-align:center;
+      color:var(--muted);background:#fafafa;padding:20px
+    }
+
+    /* FOOTER */
+    footer{padding:40px 0 26px;background:#061f3d;color:white}
+    .footer-grid{display:grid;gap:24px}
+    footer h3{color:var(--yellow)}
+    footer a{color:white;text-decoration:none}
+    .tagline{
+      border-top:1px solid rgba(255,255,255,.15);margin-top:28px;
+      padding-top:24px;text-align:center;color:#dbe6ef
+    }
+
+    @media (min-width:700px){
+      .container{width:min(calc(100% - 56px),var(--max))}
+      nav ul{display:flex}
+      .hero-grid,.story-grid{grid-template-columns:1.35fr .65fr;align-items:center}
+      .fund-top{grid-template-columns:1fr auto;align-items:end}
+      .stats{min-width:360px}
+      .sponsor-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .payment-grid{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (min-width:1000px){
+      .sponsor-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .section{padding:82px 0}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *{transition:none!important}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#inicio">
+      <span class="brand-mark">❤</span>
+      <span>
+        <strong>Juntos por Alberto</strong>
+        <small>Rifa solidaria · Comunidad TRIFENIX</small>
+      </span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#recaudacion">Recaudación</a></li>
+        <li><a href="#auspiciadores">Auspiciadores</a></li>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#pagos">Participar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Rifa solidaria · 30 de septiembre</div>
+        <h1>Juntos por <span>Alberto</span></h1>
+        <p>El deporte nos une y hoy la solidaridad nos moviliza. Participa en la rifa y ayúdanos a sumar esfuerzos para su recuperación.</p>
+      </div>
+      <aside class="hero-card">
+        <small>VALOR DEL BOLETO</small><br>
+        <strong>S/ 20</strong>
+        <p>Grandes premios gracias a las marcas y personas que se están sumando a esta causa.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section fundraising" id="recaudacion">
+    <div class="container">
+      <div class="fund-card">
+        <div class="fund-top">
+          <div>
+            <div class="eyebrow">Nuestra meta</div>
+            <div class="amount" id="raisedAmount">S/ 0</div>
+            <p class="muted">recaudados de <strong>S/ 130,000</strong></p>
+          </div>
+          <div class="stats">
+            <div class="stat"><b id="percentage">0%</b><span>de la meta</span></div>
+            <div class="stat"><b id="ticketsSold">0</b><span>boletos vendidos</span></div>
+          </div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Progreso de recaudación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progressBar"></span>
+        </div>
+        <div class="progress-copy">
+          <span>Cada boleto suma 💛</span>
+          <span>Meta: S/ 130,000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sponsors" id="auspiciadores">
+    <div class="container">
+      <div class="eyebrow">Gracias por sumarse</div>
+      <h2>Marcas y amigos auspiciadores</h2>
+      <p class="muted">Esta sección se genera automáticamente desde una lista editable al final del archivo.</p>
+      <div class="sponsor-grid" id="sponsorGrid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="historia">
+    <div class="container story-grid">
+      <div class="story-visual" aria-label="Espacio para fotografía de Alberto">
+        <div><span>🏊‍♂️</span><br><strong>Espacio para foto de Alberto</strong></div>
+      </div>
+      <div class="story-copy">
+        <div class="eyebrow">Por qué estamos aquí</div>
+        <h2>Una comunidad unida por Alberto</h2>
+        <p>Alberto es deportista, nadador y amigo de nuestra comunidad. Sufrió un paro cardíaco saliendo del mar y requirió atención en cuidados intensivos.</p>
+        <p>Su recuperación implica importantes gastos médicos. Por eso, amigos, deportistas, familias y marcas nos estamos uniendo en una rifa solidaria para ayudar a cubrirlos.</p>
+        <p><strong>Tu participación, difusión o aporte puede hacer una diferencia.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section payments" id="pagos">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--yellow)">Participa en la rifa</div>
+      <h2>Compra tu boleto por S/ 20</h2>
+      <p>Realiza el pago y conserva tu comprobante para coordinar el registro de tu boleto.</p>
+
+      <div class="payment-grid">
+        <article class="payment-card">
+          <div class="payment-title"><span>📱</span><h3>Yape</h3></div>
+          <div class="data-row"><small>Número</small><strong id="yapeNumber">965 727 299</strong></div>
+          
+          <div class="qr">QR YAPE<br><small>Reemplazar este espacio con la imagen del QR</small></div>
+        </article>
+
+        <article class="payment-card">
+          <div class="payment-title"><span>🏦</span><h3>Interbank</h3></div>
+          <div class="data-row"><small>Cuenta</small><strong id="bankAccount">898 3522230423</strong></div>
+          <div class="data-row"><small>CCI</small><strong id="bankCCI">003-898-0135222304234344</strong></div>
+          <div class="qr">QR / DATOS DE TRANSFERENCIA<br><small>Espacio editable</small></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Contacto</h3>
+        <p><a href="tel:+51965727299">965 727 299</a><br>Sandra Carrillo</p>
+      </div>
+      <div>
+        <h3>Organiza</h3>
+        <p>Comunidad TRIFENIX<br>Amigos de Alberto</p>
+      </div>
+      <div>
+        <h3>Sorteo</h3>
+        <p>30 de septiembre<br>Rifa solidaria por Alberto</p>
+      </div>
+    </div>
+    <div class="tagline">💛 El deporte nos une. La solidaridad nos hace más fuertes. · #JuntosPorAlberto</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DATOS EDITABLES
+   Cambia solamente esta sección para actualizar la página.
+   ============================================================ */
+
+const raffle = {
+  goal: 130000,
+  raised: 0,          // Ejemplo: 24500
+  ticketPrice: 20,
+  ticketsSold: 0      // Ejemplo: 1225
+};
+
+/* Reemplaza los nombres y premios conforme se confirmen.
+   La lista se actualiza conforme se confirman auspiciadores y premios. */
+const sponsors = [
+  { emoji:"🥗", name:"FIT & NO FAT", prize:"3 packs surtidos" },
+  { logo:"assets/logos/sealion.jpeg", emoji:"🚤", name:"SEALION", prize:"Paseo en zodiac para 4 personas en La Punta" },
+  { emoji:"🎁", name:"ISDNI", prize:"Productos por confirmar" },
+  { emoji:"🏃", name:"ATLETAS PERÚ", prize:"Combo por confirmar" },
+  { logo:"assets/logos/milash.png", emoji:"✨", name:"MILASH", prize:"Gift Card Beauty & Wellness: facial, pestañas y uñas" },
+  { logo:"assets/logos/podo.png", emoji:"🦶", name:"PODO ESTUDIO", prize:"Gift Card de experiencia Foot Care" },
+  { emoji:"🥜", name:"LA MIGA DE TODOS – DIEGO BRYCE", prize:"Packs de bolas proteicas, granola, mantequilla de maní y pan de centeno" },
+  { emoji:"🥽", name:"ALFREDO DÍAZ", prize:"Lentes de natación TYR Nest Pro" },
+  { emoji:"⚡", name:"ANEE BERTHITA", prize:"Caja de geles deportivos" },
+  { logo:"assets/logos/lotus.jpeg", emoji:"🚴", name:"LOTUS CYCLING", prize:"3 meses de entrenamiento de bicicleta" },
+  { emoji:"🥚", name:"LA GRANJA DE LA HUACA", prize:"2 planchas de huevos de campo" },
+  { logo:"assets/logos/limafisio.png", emoji:"💆", name:"LIMAFISIO", prize:"Sesión de descarga muscular de 1½ horas" },
+  { logo:"assets/logos/pw.jpeg", emoji:"🏊", name:"PW", prize:"2 gorros de baño Natación Perú" },
+  { emoji:"🎥", name:"JOSÉ ZORRILLA", prize:"5 sesiones de video en el mar con kayak" },
+  { logo:"assets/logos/belmonte.jpeg", emoji:"🚲", name:"RAFAEL BELMONTE", prize:"Sesión de bike fitting" },
+  { logo:"assets/logos/bont.jpeg", emoji:"👟", name:"BONT", prize:"Vale de 30% de descuento en zapatillas BONT" },
+  { logo:"assets/logos/vive-la-bike.jpeg", emoji:"🔧", name:"VIVE LA BIKE", prize:"Mantenimiento completo para bicicleta" },
+  { logo:"assets/logos/valeria-silva.jpeg", emoji:"🍎", name:"LIC. VALERIA SILVA", prize:"Consulta nutricional" },
+  { emoji:"🆔", name:"AMBAR ID", prize:"Pulsera de identificación para deportistas" },
+  { logo:"assets/logos/sumarpro.png", emoji:"🎁", name:"SUMARPRO", prize:"4 premios por confirmar" },
+  { logo:"assets/logos/nicobars.jpeg", emoji:"🍫", name:"NICOBARS", prize:"Pack de 14 barritas energéticas surtidas" },
+  { logo:"assets/logos/rvr-bike-store.jpeg", emoji:"🚲", name:"RVR BIKE STORE", prize:"2 mantenimientos básicos para bicicleta" },
+  { logo:"assets/logos/rebot.jpeg", emoji:"🌿", name:"REBOT WELLNESS & RELAX", prize:"3 sesiones de fisioterapia Wellness & Relax de 1½ horas" },
+  { logo:"assets/logos/abc-sports.png", emoji:"🏊", name:"ABC SPORTS", prize:"1 mes de natación (4 clases)" },
+  { logo:"assets/logos/bithon.png", emoji:"🏅", name:"BITHON RACE", prize:"1 inscripción para participar en la Acuatlón BITHON RACE" },
+  { logo:"assets/logos/todo-bikes.jpeg", emoji:"🛠️", name:"TODO BIKES", prize:"2 servicios preventivos en tienda-taller" }
+];
+
+/* CONTADOR AUTOMÁTICO DESDE GOOGLE SHEETS (pestaña WEB) */
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTx5Y_R61x6MY1FNep0vrgmc-Ix5p4LDSxgr6mz6Z2rrDT1-bI0cOQeireHVh3YxQ/pub?gid=968072&single=true&output=csv";
+
+function updateCounter(raised, ticketsSold) {
+  raised = Number(raised) || 0;
+  ticketsSold = Number(ticketsSold) || 0;
+  const percent = Math.min(100, raffle.goal > 0 ? (raised / raffle.goal) * 100 : 0);
+  document.getElementById("raisedAmount").textContent = "S/ " + raised.toLocaleString("es-PE", {maximumFractionDigits:2});
+  document.getElementById("percentage").textContent = percent.toLocaleString("es-PE", {maximumFractionDigits:2}) + "%";
+  document.getElementById("ticketsSold").textContent = ticketsSold.toLocaleString("es-PE");
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.querySelector(".progress").setAttribute("aria-valuenow", Math.round(percent));
+}
+
+// Último dato confirmado de la hoja WEB. Evita mostrar 0 si Google tarda o bloquea una consulta.
+updateCounter(500, 25);
+
+function csvCells(line) {
+  const cells=[]; let cur="", quoted=false;
+  for (let i=0;i<line.length;i++) {
+    const ch=line[i];
+    if (ch==='"') {
+      if (quoted && line[i+1]==='"') { cur+='"'; i++; }
+      else quoted=!quoted;
+    } else if (ch===',' && !quoted) { cells.push(cur); cur=""; }
+    else cur+=ch;
+  }
+  cells.push(cur); return cells;
+}
+
+function numericCell(value) {
+  if (value == null) return NaN;
+  let x=String(value).trim().replace(/\s/g,'').replace(/S\//gi,'');
+  // Para esta hoja los valores publicados son enteros (ej. 500 y 25).
+  x=x.replace(/[^0-9.-]/g,'');
+  return Number(x);
+}
+
+async function loadProgressFromSheet() {
+  try {
+    const response = await fetch(SHEET_CSV_URL + "&_=" + Date.now(), { cache: "no-store" });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const text = (await response.text()).replace(/^\uFEFF/, '').trim();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+    if (lines.length < 2) throw new Error("CSV sin fila de datos");
+    const row = csvCells(lines[1]);
+    const raised = numericCell(row[0]);
+    const tickets = numericCell(row[1]);
+    if (!Number.isFinite(raised) || !Number.isFinite(tickets)) throw new Error("Valores no numéricos");
+    updateCounter(raised, tickets);
+  } catch (err) {
+    console.warn("Google Sheets no respondió; se conserva el último dato confirmado.", err);
+  }
+}
+
+loadProgressFromSheet();
+setInterval(loadProgressFromSheet, 60000);
+
+/* GRID DE AUSPICIADORES */
+const grid = document.getElementById("sponsorGrid");
+sponsors.forEach(sponsor => {
+  const card = document.createElement("article");
+  card.className = "sponsor";
+
+  let icon;
+  if (sponsor.logo) {
+    icon = document.createElement("img");
+    icon.className = "sponsor-logo";
+    icon.src = sponsor.logo;
+    icon.alt = "Logo de " + sponsor.name;
+    icon.loading = "lazy";
+    icon.onerror = () => { icon.replaceWith(Object.assign(document.createElement("div"), {className:"emoji", textContent:sponsor.emoji})); };
+  } else {
+    icon = document.createElement("div");
+    icon.className = "emoji";
+    icon.textContent = sponsor.emoji;
+  }
+
+  const content = document.createElement("div");
+  const title = document.createElement("h3");
+  title.textContent = sponsor.name;
+  const prize = document.createElement("p");
+  prize.textContent = sponsor.prize;
+
+  content.append(title, prize);
+  card.append(icon, content);
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
